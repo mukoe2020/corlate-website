@@ -1,0 +1,13 @@
+{
+  "name": "corlate-technologies",
+  "version": "1.0.0",
+  "description": "Corlate Technologies - Digital Systems That Power Modern Businesses",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000"
+  },
+  "keywords": ["website", "landing-page", "digital-marketing"],
+  "author": "Corlate Technologies",
+  "license": "MIT"
+}
