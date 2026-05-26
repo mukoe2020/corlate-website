@@ -77,11 +77,17 @@
   #hero {
     position: relative; width:100%; height:100vh; min-height:620px;
     display:flex; align-items:flex-start; overflow:hidden; padding-top:200px;
+    background: linear-gradient(135deg, #0a1416 0%, #0d1c1f 100%);
   }
   .hero-video {
     position:absolute; inset:0; width:100%; height:100%;
     object-fit:cover; object-position:center;
     opacity: 0.18; z-index:0;
+  }
+  @media(max-width: 768px) {
+    .hero-video {
+      opacity: 0.12;
+    }
   }
 
   /* subtle teal geometric accent */
@@ -1120,8 +1126,9 @@
 
 <!-- HERO -->
 <section id="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata">
     <source src="assets/videos/corlate-hero.mp4" type="video/mp4">
+    Your browser does not support the video tag.
   </video>
   <div class="hero-geo"></div>
   <div class="hero-content">
@@ -1631,6 +1638,21 @@
 </a>
 
 <script>
+  // Video autoplay handler
+  const videoEl = document.querySelector('.hero-video');
+  if (videoEl) {
+    const playPromise = videoEl.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Autoplay failed:', error);
+        // Add play button overlay or fallback for mobile
+        if (window.innerWidth <= 768) {
+          videoEl.style.opacity = '0.08';
+        }
+      });
+    }
+  }
+  
   // Nav scroll
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
