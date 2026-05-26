@@ -72,6 +72,18 @@
   .nav-cta:hover { background:var(--gold-light); transform:translateY(-1px); }
   .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
   .hamburger span { width:22px; height:2px; background:#ffffff; border-radius:2px; transition:0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(10px, 10px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+  
+  .mobile-menu { display:none; position:absolute; top:76px; left:0; right:0; background:rgba(6,13,14,0.98); border-bottom:1px solid rgba(13,110,120,0.25); padding:20px 0; max-height:calc(100vh - 76px); overflow-y:auto; }
+  .mobile-menu.active { display:block; }
+  .mobile-links { display:flex; flex-direction:column; list-style:none; gap:0; }
+  .mobile-links li { border-bottom:1px solid rgba(13,110,120,0.1); }
+  .mobile-links a { display:block; padding:16px 5%; color:rgba(255,255,255,0.72); text-decoration:none; font-size:0.95rem; transition:color 0.2s, background 0.2s; }
+  .mobile-links a:hover { color:var(--gold); background:rgba(13,110,120,0.2); }
+  .mobile-cta { background:var(--gold) !important; color:#0a0a0a !important; font-weight:700; margin:12px 5%; border-radius:6px; }
+  .mobile-cta:hover { background:var(--gold-light) !important; }
 
   /* ── HERO ── */
   #hero {
@@ -974,6 +986,15 @@
     .stat-item { padding: 16px 8px; }
     .stat-num { font-size: 1.4rem; }
     .stat-desc { font-size: 0.65rem; }
+    
+    #cta { padding: 60px 5%; }
+    .cta-title { margin-bottom: 12px; }
+    .cta-sub { margin: 0 auto 30px; }
+    .cta-btns { gap: 10px; }
+    .cta-btns a { padding: 12px 20px; font-size: 0.85rem; }
+    
+    #contact { padding: 40px 5%; }
+    .contact-info .section-title { font-size: 1.5rem; }
   }
 
   /* ── FOOTER ── */
@@ -1124,6 +1145,17 @@
   <a href="#contact" class="nav-cta">Free Audit</a>
   <div class="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-links">
+      <li><a href="#hero" onclick="toggleMenu()">Home</a></li>
+      <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+      <li><a href="#about" onclick="toggleMenu()">About</a></li>
+      <li><a href="#process" onclick="toggleMenu()">Process</a></li>
+      <li><a href="#testimonials" onclick="toggleMenu()">Testimonials</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      <li><a href="#contact" class="mobile-cta" onclick="toggleMenu()">Free Audit</a></li>
+    </ul>
   </div>
 </nav>
 
@@ -1681,7 +1713,12 @@
   }
 
   // Mobile menu
-  function toggleMenu() { alert('Add your mobile nav here!'); }
+  function toggleMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  }
 
   // Team video play
   function playTeamVideo() {
